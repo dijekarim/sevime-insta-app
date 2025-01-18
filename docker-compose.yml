@@ -5,20 +5,40 @@ services:
         - "linux/amd64"
       context: ./user-service
       dockerfile: Dockerfile
-    container_name: user-service
+    container_name: insta-user-service
     volumes:
       - ./user-service:/app
     ports:
-      - "6000:6000"
+      - "6002:6000"
     env_file:
       - ./user-service/.env
     depends_on:
       - mongodb
     restart: always
 
+  insta-app:
+    build:
+      platforms:
+        - "linux/amd64"
+      context: ./insta-app
+      dockerfile: Dockerfile
+    container_name: insta-app
+    volumes:
+      - ./insta-app:/app
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - "6001:6001"
+    env_file:
+      - ./insta-app/.env
+    depends_on:
+      - user-service
+    restart: always
+
   mongodb:
-    container_name: insta-app-mongodb
-    image: mongo
+    container_name: insta-mongodb
+    image: mongo:latest
+    volumes:
+      - dbdata:/data/db
     restart: always
 
   redis:

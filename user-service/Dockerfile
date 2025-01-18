@@ -1,10 +1,10 @@
 FROM php:8.2-fpm
 
 # Set working directory
-WORKDIR /var/www/html
+WORKDIR /app
 
 # Install necessary packages
-RUN apt-get update && apt-get install -y \
+RUN apt update && apt install -y \
     libicu-dev \
     libmongoc-dev \
     zip \
@@ -20,7 +20,7 @@ RUN mv composer.phar /usr/local/bin/composer
 COPY . .
 
 # install compose
-RUN composer install
+RUN composer update
 
 # Expose port 6000
 EXPOSE 6000

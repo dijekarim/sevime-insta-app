@@ -6,12 +6,13 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "jenssegers/mongodb": "*",
         "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
+        "mongodb/laravel-mongodb": "^5.1",
         "predis/predis": "^2.0",
-        "tymon/jwt-auth": "^2.1",
-        "mongodb/laravel-mongodb": "^5.1"
+        "tymon/jwt-auth": "^2.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -73,11 +74,5 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/dijekarim/inosoft-university-models.git"
-        }
-    ]
+    "prefer-stable": true
 }
