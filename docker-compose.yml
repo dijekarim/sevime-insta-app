@@ -1,0 +1,30 @@
+services:
+  user-service:
+    build:
+      platforms:
+        - "linux/amd64"
+      context: ./user-service
+      dockerfile: Dockerfile
+    container_name: user-service
+    volumes:
+      - ./user-service:/app
+    ports:
+      - "6000:6000"
+    env_file:
+      - ./user-service/.env
+    depends_on:
+      - mongodb
+    restart: always
+
+  mongodb:
+    container_name: insta-app-mongodb
+    image: mongo
+    restart: always
+
+  redis:
+    container_name: redis
+    image: redis:alpine
+    restart: always
+
+volumes:
+  dbdata:
