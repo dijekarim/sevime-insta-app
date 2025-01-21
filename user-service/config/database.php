@@ -114,7 +114,7 @@ return [
 
         'mongodb' => [
             'driver' => 'mongodb',
-            'dsn' => env('DB_URI', 'mongodb://insta-app-mongodb:27017'),
+            'dsn' => env('DB_URI', 'mongodb://insta-mongodb:27017'),
             'database' => env('DB_NAME', 'insta-app-dev'),
         ],
 

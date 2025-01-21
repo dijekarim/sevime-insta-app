@@ -11,20 +11,16 @@ class AuthController extends Controller
 {
     public function register(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
+        $validated = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:6',
         ]);
 
-        if ($validatedData) {
-            return response()->json($validatedData, 400);
-        }
-
         $user = User::create([
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-            'password' => Hash::make($validatedData['password']),
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
         ]);
 
         $token = auth()->login($user);

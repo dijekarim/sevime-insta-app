@@ -43,4 +43,24 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function posts() {
+        return $this->hasMany(Post::class, 'user_id', '_id');
+    }
+
+    public function likes() {
+        return $this->hasMany(PostLike::class, 'user_id', '_id');
+    }
+
+    // Users this user is following
+    public function following()
+    {
+        return $this->hasMany(Follower::class, 'follower_id', '_id');
+    }
+
+    // Users who follow this user
+    public function followers()
+    {
+        return $this->hasMany(Follower::class, 'user_id', '_id');
+    }
 }
